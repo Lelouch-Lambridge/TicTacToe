@@ -2,36 +2,42 @@ using System;
   
 namespace TicTacToe {
  class Grid {
-  public char[,] grid;
-  public int size;
+  private char[,] grid;
+  private int size;
 
   public Grid(int size){
    this.size = size;
-   grid = new char[size,size];
+   this.grid = new char[size,size];
+   this.clear();
   }
 
-  public char this[int index1,int index2]{
+  private char this[int index1,int index2]{
    get{
-    return grid[index1,index2];
+    return this.grid[index1,index2];
    }
    set{
-    grid[index1,index2] = value;
+    this.grid[index1,index2] = value;
    }
   }
 
-  static void Main(string[] args){
-   Grid grid = new Grid(3);
-   char duff = 'o';
-   for (int i = 0; i < grid.size; i++){
-    for (int j = 0; j < grid.size; j++){
-     grid[i,j] = duff;
-     if (duff == 'x'){
-      duff = 'x';
-     } else {
-      duff = 'o';
-     }
+  public void clear(){
+   for (int r = 0; r < size; r++){
+    for (int c = 0; c < size; c++){
+     this.grid[r,c] = '0';
     }
    }
   }
+
+  
+
+  static void Main(string[] args){
+   Grid grid = new Grid(3);
+   System.Console.WriteLine(grid[1,1]);
+  }
+ }
+
+ class Player{
+  private int key;
+  private char;
  }
 }
