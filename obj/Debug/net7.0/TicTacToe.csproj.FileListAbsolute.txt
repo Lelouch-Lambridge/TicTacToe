@@ -1,0 +1,15 @@
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/bin/Debug/net7.0/TicTacToe
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/bin/Debug/net7.0/TicTacToe.deps.json
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/bin/Debug/net7.0/TicTacToe.runtimeconfig.json
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/bin/Debug/net7.0/TicTacToe.dll
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/bin/Debug/net7.0/TicTacToe.pdb
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/obj/Debug/net7.0/TicTacToe.csproj.AssemblyReference.cache
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/obj/Debug/net7.0/TicTacToe.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/obj/Debug/net7.0/TicTacToe.AssemblyInfoInputs.cache
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/obj/Debug/net7.0/TicTacToe.AssemblyInfo.cs
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/obj/Debug/net7.0/TicTacToe.csproj.CoreCompileInputs.cache
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/obj/Debug/net7.0/TicTacToe.dll
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/obj/Debug/net7.0/refint/TicTacToe.dll
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/obj/Debug/net7.0/TicTacToe.pdb
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/obj/Debug/net7.0/TicTacToe.genruntimeconfig.cache
+/Users/ohmpanchal/Documents/Lelou-Git/TicTacToe/obj/Debug/net7.0/ref/TicTacToe.dll
