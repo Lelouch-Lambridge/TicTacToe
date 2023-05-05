@@ -28,16 +28,30 @@ namespace TicTacToe {
    }
   }
 
-  
-
   static void Main(string[] args){
    Grid grid = new Grid(3);
    System.Console.WriteLine(grid[1,1]);
+   Player p1 = new Player();
+   Player p2 = new Player(); 
+   Player p3 = new Player(); 
+   System.Console.WriteLine(p1.player);
+   System.Console.WriteLine(p2.player);
+   System.Console.WriteLine(p3.player);
   }
  }
 
  class Player{
-  private int key;
-  private char;
+  private static int players = 0;
+  public char player = '0';
+  public Player(){
+   if (players < 1){
+    player = 'x';
+    players++;
+   } else if (players < 2){
+    player = 'o';
+    players++;
+   }
+   
+  }
  }
 }
