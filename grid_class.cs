@@ -22,6 +22,7 @@ namespace TicTacToe {
   private char[,] grid;
   private int size;
   private bool move = false;
+  public bool over = false;
   private Dictionary<bool,char> tu = new Dictionary<bool,char>
   (){{false,Player.X.letter},{true,Player.O.letter}};
 
@@ -42,9 +43,10 @@ namespace TicTacToe {
   }
 
   public void turn(int r, int c){
+   if (this.grid[r,c] != ' ') return;
    this.grid[r,c] = tu[move];
    move = !move;
-   this.print();
+   this.update();
   }
 
   private void print(){
@@ -63,6 +65,16 @@ namespace TicTacToe {
     for (int i = 0; i++ < size; row_out += "----");
     row_out += "\n ";
    }
+  }
+
+  private void update(){
+   this.print();
+   for (int r = 0; r < size; r++){
+    for (int c = 0; c < size; c++){
+     if (grid[r,c] == ' ') return;
+    }
+   }
+   this.over = true;
   }
 
   private void clear(){
@@ -102,16 +114,19 @@ namespace TicTacToe {
  class Game{
   static void Main(string[] args){
    Grid grid = Grid.make;
-   grid.turn(0,0);
-   grid.turn(0,1);
-   grid.turn(0,2);
-   grid.turn(1,0);
-   grid.turn(1,1);
-   grid.turn(1,2);
-   grid.turn(2,0);
-   grid.turn(2,1);
-   grid.turn(2,2);
+   while (!grid.over){
+    grid.turn(0,0);
+    grid.turn(2,2);
+    grid.turn(0,2);
+    grid.turn(2,0);
+    grid.turn(1,1);
+    grid.turn(1,2);
+    grid.turn(2,0);
+    grid.turn(2,1);
+    grid.turn(0,1);
+    grid.turn(2,1);
+    grid.turn(1,0);
+   }
   }
  }
 }
-
