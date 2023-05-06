@@ -42,9 +42,9 @@ namespace TicTacToe {
    this.print();
   }
 
-  public void turn(int r, int c){
-   if (this.grid[r,c] != ' ') return;
-   this.grid[r,c] = tu[move];
+  public void turn((int,int) x){
+   if (this.grid[x.Item1,x.Item2] != ' ') return;
+   this.grid[x.Item1,x.Item2] = tu[move];
    move = !move;
    this.update();
   }
@@ -69,7 +69,12 @@ namespace TicTacToe {
 
   private void update(){
    this.print();
+   if (this.over = (this.check(this.diagonal()) || this.check(this.antidiagonal()))) return;
+
    for (int r = 0; r < size; r++){
+
+    if (this.over = (this.check(this.row(r)) || this.check(this.column(r)))) return;
+
     for (int c = 0; c < size; c++){
      if (grid[r,c] == ' ') return;
     }
@@ -83,6 +88,23 @@ namespace TicTacToe {
      grid[r,c] = ' ';
     }
    }
+  }
+
+  private bool check(char[] arr){
+   return arr.Distinct().Count() == 1 && arr[0] != ' ';
+  }
+
+  private char[] column(int columnNumber){
+   return Enumerable.Range(0, size).Select(x => grid[x, columnNumber]).ToArray();
+  }
+  private char[] row(int rowNumber){
+   return Enumerable.Range(0, size).Select(x => grid[rowNumber, x]).ToArray();
+  }
+  private char[] diagonal(){
+   return Enumerable.Range(0,size).Select(x => grid[x,x]).ToArray();
+  }
+  private char[] antidiagonal(){
+   return Enumerable.Range(0,size).Select(x => grid[x,size-1-x]).ToArray();
   }
  }
 
@@ -114,19 +136,16 @@ namespace TicTacToe {
  class Game{
   static void Main(string[] args){
    Grid grid = Grid.make;
+   Dictionary<int,(int,int)> test = new Dictionary<int,(int,int)>()
+   {{1,(0,0)},{2,(0,1)},{3,(0,2)},{4,(1,0)},{5,(1,1)},{6,(1,2)},{7,(2,0)},{8,(2,1)},{9,(2,2)}};
    while (!grid.over){
-    grid.turn(0,0);
-    grid.turn(2,2);
-    grid.turn(0,2);
-    grid.turn(2,0);
-    grid.turn(1,1);
-    grid.turn(1,2);
-    grid.turn(2,0);
-    grid.turn(2,1);
-    grid.turn(0,1);
-    grid.turn(2,1);
-    grid.turn(1,0);
+    grid.turn(test[Convert.ToInt32(System.Console.ReadLine())]);
    }
   }
  }
 }
+
+
+
+
+
