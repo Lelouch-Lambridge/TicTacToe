@@ -23,7 +23,7 @@ namespace TicTacToe {
   public void clear(){
    for (int r = 0; r < size; r++){
     for (int c = 0; c < size; c++){
-     this.grid[r,c] = '0';
+     this.grid[r,c] = '\0';
     }
    }
   }
@@ -31,27 +31,34 @@ namespace TicTacToe {
   static void Main(string[] args){
    Grid grid = new Grid(3);
    System.Console.WriteLine(grid[1,1]);
-   Player p1 = new Player();
-   Player p2 = new Player(); 
-   Player p3 = new Player(); 
-   System.Console.WriteLine(p1.player);
-   System.Console.WriteLine(p2.player);
-   System.Console.WriteLine(p3.player);
+   x_Player p1 = x_Player.Instance;
+   System.Console.WriteLine(p1.letter);
+   y_Player p2 = y_Player.Instance;
+   System.Console.WriteLine(p2.letter);
   }
  }
 
- class Player{
-  private static int players = 0;
-  public char player = '0';
-  public Player(){
-   if (players < 1){
-    player = 'x';
-    players++;
-   } else if (players < 2){
-    player = 'o';
-    players++;
+ public abstract class Player<T> where T : class, new(){
+  private static readonly Lazy<T> instance = new Lazy<T>(() => CreateInstanceofT());
+
+  public static T Instance{
+   get{
+    return instance.Value;
    }
-   
+  }
+
+  private static T CreateInstanceofT(){
+   return Activator.CreateInstance(typeof(T), true) as T;
   }
  }
+
+ class x_Player : Player<x_Player>{
+  public char letter = 'x';
+ }
+
+ class y_Player : Player<y_Player>{
+  public char letter = 'o';
+ }
 }
+
+
