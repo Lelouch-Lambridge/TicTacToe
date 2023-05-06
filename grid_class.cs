@@ -1,15 +1,29 @@
 using System;
   
 namespace TicTacToe {
- class Grid {
-  private char[,] grid;
-  private int size;
+ public class Grid {
+  /*---*/
+  private static readonly Lazy<Grid> grid_inst = new Lazy<Grid>(() => new Grid(3));
 
-  public Grid(int size){
+  private Grid(int size){
    this.size = size;
    this.grid = new char[size,size];
-   clear();
+   this.clear();
+   this.print();
   }
+
+
+  public static Grid make{
+   get{
+    return grid_inst.Value;
+   }
+  }
+  /*---*/
+  private char[,] grid;
+  private int size;
+  private bool move = false;
+  private Dictionary<bool,char> tu = new Dictionary<bool,char>
+  (){{false,Player.X.letter},{true,Player.O.letter}};
 
   public char this[int index1,int index2]{
    get{
@@ -20,54 +34,84 @@ namespace TicTacToe {
    }
   }
 
-  public void turn(char ch, int r, int c){
-   this.grid[r,c] = ch;
+  public void resize(int size){
+   this.size = size;
+   this.grid = new char[size,size];
+   this.clear();
+   this.print();
+  }
+
+  public void turn(int r, int c){
+   this.grid[r,c] = tu[move];
+   move = !move;
+   this.print();
+  }
+
+  private void print(){
+   string row_out = " ";
+   for (int r = 0; r < size; r++){
+    for (int c = 0; c < size; c++){
+     row_out += grid[r,c];
+     if (c == size-1) continue;
+     row_out += " | ";
+    }
+    if (r == size-1){
+     System.Console.WriteLine(row_out + "\n");
+     return;
+    }
+    row_out += "\n";
+    for (int i = 0; i++ < size; row_out += "----");
+    row_out += "\n ";
+   }
   }
 
   private void clear(){
    for (int r = 0; r < size; r++){
     for (int c = 0; c < size; c++){
-     grid[r,c] = '\0';
+     grid[r,c] = ' ';
     }
    }
   }
  }
 
  public class Player{
+  /*---*/
   private static readonly Lazy<Player> x = new Lazy<Player>(() => new Player('x'));
-  private static readonly Lazy<Player> o = new Lazy<Player>(() => new Player('o'));
-  public char letter{get;}
+
+  private Player(char c){
+   this.letter = c;
+  }
 
   public static Player X{
    get{
     return x.Value;
    }
   }
+  /*---*/
 
+  private static readonly Lazy<Player> o = new Lazy<Player>(() => new Player('o'));
   public static Player O{
    get{
     return o.Value;
    }
   }
 
-  private Player(char c){
-    this.letter = c;
-  }
+  public char letter{get;}
  }
 
  class Game{
   static void Main(string[] args){
-   Grid grid = new Grid(3);
-   System.Console.WriteLine(grid[1,1]);
-
-   Player p1 = Player.X;
-   Player p2 = Player.O;
-
-   System.Console.WriteLine(p1.letter);
-   System.Console.WriteLine(p2.letter);
-
-   grid.turn(p1.letter,2,1);
-   System.Console.WriteLine(grid[2,1]);
+   Grid grid = Grid.make;
+   grid.turn(0,0);
+   grid.turn(0,1);
+   grid.turn(0,2);
+   grid.turn(1,0);
+   grid.turn(1,1);
+   grid.turn(1,2);
+   grid.turn(2,0);
+   grid.turn(2,1);
+   grid.turn(2,2);
   }
  }
 }
+
