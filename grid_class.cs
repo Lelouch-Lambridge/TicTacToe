@@ -33,35 +33,37 @@ namespace TicTacToe {
   }
  }
 
- public abstract class Player<T> where T : class, new(){
-  private static readonly Lazy<T> instance = new Lazy<T>(() => CreateInstanceofT());
+ public class Player{
+  private static readonly Lazy<Player> x = new Lazy<Player>(() => new Player('x'));
+  private static readonly Lazy<Player> o = new Lazy<Player>(() => new Player('o'));
+  public char letter{get;}
 
-  private static T CreateInstanceofT(){
-   return Activator.CreateInstance(typeof(T), true) as T;
-  }
-  public static T Instance{
+  public static Player X{
    get{
-    return instance.Value;
+    return x.Value;
    }
   }
- }
 
- class x_Player : Player<x_Player>{
-  public char letter = 'x';
- }
+  public static Player O{
+   get{
+    return o.Value;
+   }
+  }
 
- class y_Player : Player<y_Player>{
-  public char letter = 'o';
+  private Player(char c){
+    this.letter = c;
+  }
  }
 
  class Game{
-
   static void Main(string[] args){
    Grid grid = new Grid(3);
    System.Console.WriteLine(grid[1,1]);
-   x_Player p1 = x_Player.Instance;
+
+   Player p1 = Player.X;
+   Player p2 = Player.O;
+
    System.Console.WriteLine(p1.letter);
-   y_Player p2 = y_Player.Instance;
    System.Console.WriteLine(p2.letter);
 
    grid.turn(p1.letter,2,1);
