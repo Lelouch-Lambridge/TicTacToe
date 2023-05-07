@@ -1,5 +1,5 @@
 using System;
-  
+
 namespace TicTacToe {
  public class Grid {
   /*---*/
@@ -25,6 +25,7 @@ namespace TicTacToe {
   private Dictionary<bool,char> tu = new Dictionary<bool,char>
   (){{false,Player.X.letter},{true,Player.O.letter}};
 
+  // overload [] operater of Grid objects
   public char this[int index1,int index2]{
    get{
     return grid[index1,index2];
@@ -33,7 +34,8 @@ namespace TicTacToe {
     grid[index1,index2] = value;
    }
   }
-
+  
+  // incase a larger grid is desired to play on
   public void resize(int size){
    this.size = size;
    this.grid = new char[size,size];
@@ -44,6 +46,7 @@ namespace TicTacToe {
   public void turn((int,int) x){
    if (this.grid[x.Item1,x.Item2] != ' ') return;
    this.grid[x.Item1,x.Item2] = tu[move];
+   // swap who gets to place
    move = !move;
    this.update();
   }
@@ -68,9 +71,11 @@ namespace TicTacToe {
 
   private void update(){
    this.print();
+   // only check diagonals once
    if (this.over = (this.check(this.diagonal()) || this.check(this.antidiagonal()))) return;
 
    for (int r = 0; r < size; r++){
+    // check each of the rows and columns
     if (this.over = (this.check(this.row(r)) || this.check(this.column(r)))) return;
     for (int c = 0; c < size; c++) if (grid[r,c] == ' ') return;
    }
@@ -84,7 +89,8 @@ namespace TicTacToe {
     }
    }
   }
-
+   
+  // used to check if there is a winner
   private bool check(char[] arr){
    return arr.Distinct().Count() == 1 && arr[0] != ' ';
   }
@@ -116,14 +122,14 @@ namespace TicTacToe {
    }
   }
   /*---*/
-
+  // second instance of player class for player 2
   private static readonly Lazy<Player> o = new Lazy<Player>(() => new Player('o'));
   public static Player O{
    get{
     return o.Value;
    }
   }
-
+  // letter only has get method so no way to change it
   public char letter{get;}
  }
 
@@ -137,8 +143,3 @@ namespace TicTacToe {
   }
  }
 }
-
-
-
-
-
