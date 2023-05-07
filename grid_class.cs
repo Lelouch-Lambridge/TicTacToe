@@ -12,7 +12,6 @@ namespace TicTacToe {
    this.print();
   }
 
-
   public static Grid make{
    get{
     return grid_inst.Value;
@@ -72,12 +71,8 @@ namespace TicTacToe {
    if (this.over = (this.check(this.diagonal()) || this.check(this.antidiagonal()))) return;
 
    for (int r = 0; r < size; r++){
-
     if (this.over = (this.check(this.row(r)) || this.check(this.column(r)))) return;
-
-    for (int c = 0; c < size; c++){
-     if (grid[r,c] == ' ') return;
-    }
+    for (int c = 0; c < size; c++) if (grid[r,c] == ' ') return;
    }
    this.over = true;
   }
@@ -93,7 +88,6 @@ namespace TicTacToe {
   private bool check(char[] arr){
    return arr.Distinct().Count() == 1 && arr[0] != ' ';
   }
-
   private char[] column(int columnNumber){
    return Enumerable.Range(0, size).Select(x => grid[x, columnNumber]).ToArray();
   }
@@ -138,9 +132,8 @@ namespace TicTacToe {
    Grid grid = Grid.make;
    Dictionary<int,(int,int)> test = new Dictionary<int,(int,int)>()
    {{1,(0,0)},{2,(0,1)},{3,(0,2)},{4,(1,0)},{5,(1,1)},{6,(1,2)},{7,(2,0)},{8,(2,1)},{9,(2,2)}};
-   while (!grid.over){
-    grid.turn(test[Convert.ToInt32(System.Console.ReadLine())]);
-   }
+
+   while (!grid.over) grid.turn(test[Convert.ToInt32(System.Console.ReadLine())]);
   }
  }
 }
