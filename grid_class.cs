@@ -1,6 +1,16 @@
 using System;
 
 namespace TicTacToe {
+ public struct Coords{
+  public Coords(int r, int c){
+   this.r = r;
+   this.c = c;
+  }
+
+  public int r { get; }
+  public int c { get; }
+ }
+
  public class Grid {
   /*---*/
   private static readonly Lazy<Grid> grid_inst = new Lazy<Grid>(() => new Grid(3));
@@ -82,6 +92,14 @@ namespace TicTacToe {
    this.over = true;
   }
 
+  private (int,int)[] get_open(){
+   var out = new (int,int)[];
+   for (int r = 0, i = 0; r < size; r++){
+    for (int c = 0; c < size; c++) if (grid[r,c] == ' ') out[i++] = (r,c);
+   }
+   return out;
+  }
+
   private void clear(){
    for (int r = 0; r < size; r++){
     for (int c = 0; c < size; c++){
@@ -131,6 +149,23 @@ namespace TicTacToe {
   }
   // letter only has get method so no way to change it
   public char letter{get;}
+ }
+
+ public class Bot{
+  private static readonly Lazy<Bot> bot = new Lazy<Bot>(() => new Bot('o'));
+
+  private Bot(char c){
+   this.letter = c;
+  }
+
+  public static Bot Cmp{
+   get{
+    return bot.Value;
+   }
+  }
+  public void turn(Grid grid){
+   System.Console.WriteLine(grid.get_open());
+  }
  }
 
  class Game{
